@@ -20,6 +20,17 @@ use App\Http\Controllers\Api\V1\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
+    Route::get('/', function () {
+        return response()->json([
+            'success' => true,
+            'message' => 'Soft Khata API v1',
+            'endpoints' => [
+                'POST /api/v1/register',
+                'POST /api/v1/login',
+            ],
+        ]);
+    });
+
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
 
