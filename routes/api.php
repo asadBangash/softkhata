@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\BusinessController;
 use App\Http\Controllers\Api\V1\CashBookController;
 use App\Http\Controllers\Api\V1\DashboardController;
+use App\Http\Controllers\Api\V1\ExpenseCategoryController;
 use App\Http\Controllers\Api\V1\ExpenseController;
 use App\Http\Controllers\Api\V1\InvoiceController;
 use App\Http\Controllers\Api\V1\NotificationController;
@@ -55,6 +56,7 @@ Route::prefix('v1')->group(function () {
         Route::post('invoices/{invoice}/payments', [InvoiceController::class, 'recordPayment']);
         Route::apiResource('invoices', InvoiceController::class);
 
+        Route::get('expense-categories', [ExpenseCategoryController::class, 'index']);
         Route::apiResource('expenses', ExpenseController::class);
 
         Route::get('staff/{staff}/attendance', [StaffController::class, 'attendanceIndex']);

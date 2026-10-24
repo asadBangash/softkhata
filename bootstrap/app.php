@@ -14,6 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         apiPrefix: 'api',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->api(prepend: [
+            \App\Http\Middleware\ForceApiCors::class,
+        ]);
         $middleware->alias([
             'business.access' => \App\Http\Middleware\EnsureBusinessAccess::class,
         ]);
