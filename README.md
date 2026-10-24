@@ -1,50 +1,34 @@
-# Soft Khata API
+# Soft Khata — Laravel API
 
-Node.js REST API for the Soft Khata credit ledger mobile app. Uses **Express** and **MySQL**.
+REST API backend for the **Soft Khata** Flutter business ledger app.
 
-## Local setup (Laragon)
+**Stack:** Laravel 13 · Sanctum · MySQL (`business_ledger`)
 
-1. Start **Laragon** and ensure **MySQL** is running.
-2. Create the database and tables:
+## Setup (local / Laragon)
 
-   ```bash
-   mysql -u root softkhata < db/schema.sql
-   ```
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+# Configure DB_* in .env (MySQL)
+php artisan migrate --seed
+php artisan serve
+```
 
-   Or create database `softkhata` in HeidiSQL/phpMyAdmin and import `db/schema.sql`.
+API base: `http://127.0.0.1:8000/api/v1/`
 
-3. Copy environment file and adjust if needed:
+**Demo login (after seed):** `demo@example.com` / `password`
 
-   ```bash
-   copy .env.example .env
-   ```
+## Flutter
 
-   Default Laragon values: `DB_HOST=localhost`, `DB_USER=root`, empty password, `DB_NAME=softkhata`.
+Run the app against this API:
 
-4. Install and run:
+```bash
+flutter run -t lib/main_laravel.dart
+```
 
-   ```bash
-   npm install
-   npm start
-   ```
+See repo docs: `API_DOCUMENTATION.md`, `FLUTTER_LARAVEL_INTEGRATION.md` (in parent project folder).
 
-API base URL: `http://localhost:5000/api/`
+## Note
 
-## Environment variables
-
-| Variable       | Description        |
-|----------------|--------------------|
-| `DB_HOST`      | MySQL host         |
-| `DB_PORT`      | MySQL port (3306)  |
-| `DB_USER`      | MySQL user         |
-| `DB_PASSWORD`  | MySQL password     |
-| `DB_NAME`      | Database name      |
-| `TOKEN_SECRET` | JWT signing secret |
-| `PORT`         | HTTP port (5000)   |
-
-## Endpoints (prefix `/api`)
-
-- `POST /auth/signup`, `POST /auth/login`
-- `POST /user/get`, `POST /user/update`
-- `POST /customer/add`, `get`, `edit`, `delete`
-- `POST /entry/add`, `get`, `update`, `delete`, `details`
+This repository previously contained the legacy **Node.js** API. It has been replaced by Laravel. Node source is no longer maintained here.
